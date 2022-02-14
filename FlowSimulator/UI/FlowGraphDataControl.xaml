@@ -1,0 +1,208 @@
+﻿<UserControl x:Class="FlowSimulator.UI.FlowGraphDataControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+        xmlns:base="clr-namespace:FlowGraphBase;assembly=FlowGraphBase"
+        xmlns:root="clr-namespace:FlowSimulator"
+        mc:Ignorable="d" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        d:DesignHeight="230" d:DesignWidth="390">
+
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+
+    <UserControl.CommandBindings>
+        <!-- flow graph management -->
+        <CommandBinding Command="{StaticResource Commands.OpenGraph}" Executed="OpenGraph_Executed" />
+        <CommandBinding Command="{StaticResource Commands.CreateGraph}" Executed="CreateGraph_Executed" />
+        <CommandBinding Command="{StaticResource Commands.RenameGraph}" Executed="RenameGraph_Executed" />
+        <CommandBinding Command="{StaticResource Commands.DeleteGraph}" Executed="DeleteGraph_Executed" />
+
+        <CommandBinding Command="{StaticResource Commands.OpenFunction}" Executed="OpenFunction_Executed" />
+        <CommandBinding Command="{StaticResource Commands.CreateFunction}" Executed="CreateFunction_Executed" />
+        <CommandBinding Command="{StaticResource Commands.RenameFunction}" Executed="RenameFunction_Executed" />
+        <CommandBinding Command="{StaticResource Commands.DeleteFunction}" Executed="DeleteFunction_Executed" />
+
+        <CommandBinding Command="{StaticResource Commands.CreateNamedVar}" Executed="CreateNamedVar_Executed" />
+        <CommandBinding Command="{StaticResource Commands.RenameNamedVar}" Executed="RenameNamedVar_Executed" />
+        <CommandBinding Command="{StaticResource Commands.DeleteNamedVar}" Executed="DeleteNamedVar_Executed" />
+
+        <CommandBinding Command="{StaticResource Commands.OpenScript}" Executed="OpenScript_Executed" />
+        <CommandBinding Command="{StaticResource Commands.CreateScript}" Executed="CreateScript_Executed" />
+        <CommandBinding Command="{StaticResource Commands.RenameScript}" Executed="RenameScript_Executed" />
+        <CommandBinding Command="{StaticResource Commands.DeleteScript}" Executed="DeleteScript_Executed" />
+    </UserControl.CommandBindings>
+
+    <Grid>
+
+        <ScrollViewer CanContentScroll="True" 
+                      VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel Grid.Row="0" Orientation="Vertical" 
+                Margin="0,0,5,0" MinWidth="150">
+
+                <Expander x:Name="expanderGraphs" Header="Графы" Style="{StaticResource expanderStyle}"
+                          Foreground="White" Margin="0,0,0,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ListBox x:Name="listBoxGraphs" Grid.Row="0" Margin="0,0,0,5" IsSynchronizedWithCurrentItem="True"
+                                ItemsSource="{Binding GraphList, Source={x:Static base:GraphDataManager.Instance}, Mode=OneWay}" 
+                                Foreground="White" BorderThickness="0" Background="Transparent"
+                                PreviewMouseLeftButtonDown="listBox_PreviewMouseLeftButtonDown">
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Открыть" Command="{StaticResource Commands.OpenGraph}"/>
+                                    <MenuItem Header="Новый" Command="{StaticResource Commands.CreateGraph}"/>
+                                    <MenuItem Header="Переименовать" Command="{StaticResource Commands.RenameGraph}"/>
+                                    <MenuItem Header="Удалить" Command="{StaticResource Commands.DeleteGraph}"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Margin="2" Text="{Binding Name}"/>
+                                        <TextBlock Margin="2" Text="{Binding Description}" Padding="15,0,0,0"
+                                            FontSize="11" FontStyle="Italic" Foreground="LightGray" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                    <EventSetter Event="MouseDoubleClick" Handler="ListBoxGraphIte_MouseDoubleClick"  />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+
+                        <Button Grid.Row="1" Content="Создать" 
+                                HorizontalAlignment="Right" Command="{StaticResource Commands.CreateGraph}"/>
+                    </Grid>
+                </Expander>
+                <Expander x:Name="expanderVariables" Header="Переменные" Style="{StaticResource expanderStyle}"
+                          Foreground="White" Margin="0,0,0,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ListBox x:Name="listBoxGraphNamedVars" Grid.Row="0" Margin="0,0,0,5" IsSynchronizedWithCurrentItem="True"
+                                ItemsSource="{Binding Vars, Mode=OneWay, Source={x:Static base:NamedVariableManager.Instance}}"
+                                Foreground="White" BorderThickness="0" Background="Transparent"
+                                PreviewMouseLeftButtonDown="listBoxGraphNamedVars_PreviewMouseLeftButton"
+                                PreviewMouseLeftButtonUp="listBoxGraphNamedVars_PreviewMouseLeftButton"
+                                PreviewMouseMove="listBoxGraphNamedVars_PreviewMouseMove">
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Создать" Command="{StaticResource Commands.CreateNamedVar}"/>
+                                    <MenuItem Header="Переименовать" Command="{StaticResource Commands.RenameNamedVar}"/>
+                                    <MenuItem Header="Удалить" Command="{StaticResource Commands.DeleteNamedVar}"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Margin="2" Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Button Grid.Row="1" Content="Создать" HorizontalAlignment="Right"
+                                Command="{StaticResource Commands.CreateNamedVar}"/>
+                    </Grid>
+                </Expander>
+
+                <Expander x:Name="expanderFunctions" Header="Функции" Style="{StaticResource expanderStyle}"
+                          Foreground="White" Margin="0,0,0,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ListBox x:Name="listBoxGraphFunctions" Grid.Row="0" Margin="0,0,0,5" IsSynchronizedWithCurrentItem="True"
+                                ItemsSource="{Binding GraphFunctionList, Source={x:Static base:GraphDataManager.Instance}, Mode=OneWay}"
+                                Foreground="White" BorderThickness="0" Background="Transparent"
+                                PreviewMouseLeftButtonDown="listBoxGraphFunctions_PreviewMouseLeftButton"
+                                PreviewMouseLeftButtonUp="listBoxGraphFunctions_PreviewMouseLeftButton"
+                                PreviewMouseMove="listBoxGraphFunctions_PreviewMouseMove">
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Открыть" Command="{StaticResource Commands.OpenFunction}"/>
+                                    <MenuItem Header="Создать" Command="{StaticResource Commands.CreateFunction}"/>
+                                    <MenuItem Header="Переименовать" Command="{StaticResource Commands.RenameFunction}"/>
+                                    <MenuItem Header="Удалить" Command="{StaticResource Commands.DeleteFunction}"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Margin="2" Text="{Binding Name}"/>
+                                        <TextBlock Margin="2" Text="{Binding Description}" Padding="15,0,0,0"
+                                            FontSize="11" FontStyle="Italic" Foreground="Gray" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                    <EventSetter Event="MouseDoubleClick" Handler="ListBoxGraphFunctionIte_MouseDoubleClick"  />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+
+                        <Button Grid.Row="1" Content="Создать" HorizontalAlignment="Right"
+                                Command="{StaticResource Commands.CreateFunction}"/>
+                    </Grid>
+                </Expander>
+                <Expander x:Name="expanderScripts" Header="Скрипты" Style="{StaticResource expanderStyle}"
+                          Foreground="White">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ListBox x:Name="listBoxGraphScripts" Grid.Row="0" Margin="0,0,0,5" IsSynchronizedWithCurrentItem="True"
+                                ItemsSource="{Binding ScriptElementList, Mode=OneWay, Source={x:Static base:GraphDataManager.Instance}}"
+                                Foreground="White" BorderThickness="0" Background="Transparent"
+                                PreviewMouseLeftButtonDown="listBoxGraphNamedVars_PreviewMouseLeftButton"
+                                PreviewMouseLeftButtonUp="listBoxGraphNamedVars_PreviewMouseLeftButton"
+                                PreviewMouseMove="listBoxGraphScripts_PreviewMouseMove">
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Открыть" Command="{StaticResource Commands.OpenScript}"/>
+                                    <MenuItem Header="Создать" Command="{StaticResource Commands.CreateScript}"/>
+                                    <MenuItem Header="Переименовать" Command="{StaticResource Commands.RenameScript}"/>
+                                    <MenuItem Header="Удалить" Command="{StaticResource Commands.DeleteScript}"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Margin="2" Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                    <EventSetter Event="Control.MouseDoubleClick" Handler="ListBoxGraphScriptIte_MouseDoubleClick"  />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+
+                        <Button Grid.Row="1" Content="Создать" HorizontalAlignment="Right"
+                                Command="{StaticResource Commands.CreateScript}"/>
+                    </Grid>
+                </Expander>
+
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
