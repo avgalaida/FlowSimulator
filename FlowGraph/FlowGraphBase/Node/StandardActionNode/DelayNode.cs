@@ -5,9 +5,6 @@ using FlowGraphBase.Process;
 
 namespace FlowGraphBase.Node.StandardActionNode
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [Category("Time"), Name("Delay")]
     public class DelayNode
         : ActionNode
@@ -23,28 +20,16 @@ namespace FlowGraphBase.Node.StandardActionNode
 
         public override string Title => "Delay";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="node_"></param>
         public DelayNode(XmlNode node)
             : base(node)
         {
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="node_"></param>
         public DelayNode()
         {
 
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void InitializeSlots()
         {
             base.InitializeSlots();
@@ -55,10 +40,6 @@ namespace FlowGraphBase.Node.StandardActionNode
             AddSlot((int)NodeSlotId.Delay, "Duration (ms)", SlotType.VarIn, typeof(int));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public override ProcessingInfo ActivateLogic(ProcessingContext context, NodeSlot slot)
         {
             ProcessingInfo info = new ProcessingInfo
@@ -115,11 +96,6 @@ namespace FlowGraphBase.Node.StandardActionNode
             context.RegisterNextExecution(GetSlotById((int)NodeSlotId.In));
             return info;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         protected override SequenceNode CopyImpl()
         {
             return new DelayNode();

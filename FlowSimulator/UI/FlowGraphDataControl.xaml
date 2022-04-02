@@ -23,6 +23,7 @@
         <CommandBinding Command="{StaticResource Commands.CreateFunction}" Executed="CreateFunction_Executed" />
         <CommandBinding Command="{StaticResource Commands.RenameFunction}" Executed="RenameFunction_Executed" />
         <CommandBinding Command="{StaticResource Commands.DeleteFunction}" Executed="DeleteFunction_Executed" />
+        <CommandBinding Command="{StaticResource Commands.ArgEdit}" Executed="ArgEdit_Executed" />
 
         <CommandBinding Command="{StaticResource Commands.CreateNamedVar}" Executed="CreateNamedVar_Executed" />
         <CommandBinding Command="{StaticResource Commands.RenameNamedVar}" Executed="RenameNamedVar_Executed" />
@@ -135,6 +136,7 @@
                             <ListBox.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Открыть" Command="{StaticResource Commands.OpenFunction}"/>
+                                    <MenuItem Header="Тест" Command="{StaticResource Commands.ArgEdit}"/>
                                     <MenuItem Header="Создать" Command="{StaticResource Commands.CreateFunction}"/>
                                     <MenuItem Header="Переименовать" Command="{StaticResource Commands.RenameFunction}"/>
                                     <MenuItem Header="Удалить" Command="{StaticResource Commands.DeleteFunction}"/>

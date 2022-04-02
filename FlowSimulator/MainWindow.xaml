@@ -6,8 +6,9 @@
         xmlns:process="clr-namespace:FlowGraphBase.Process;assembly=FlowGraphBase"
         xmlns:local="clr-namespace:FlowSimulator"
         xmlns:ui="clr-namespace:FlowSimulator.UI"
-        
-        Title="Визуальный редактор логики" Height="681" Width="851">
+        Title="Визуальный редактор логики" Height="681" Width="851"
+        Background="White">
+    
 
     <Window.CommandBindings>
         <CommandBinding Command="New" Executed="NewCommandBinding_Executed" />

@@ -3,43 +3,28 @@ using System.ComponentModel;
 
 namespace FlowGraphBase
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public enum FunctionSlotType
     {
         Input,
         Output
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class SequenceFunctionSlot : INotifyPropertyChanged
     {
         private string _name;
         private Type _varType;
         private bool _isArray;
 
-        /// <summary>
-        /// 
-        /// </summary>
         public int Id
         {
             get;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public FunctionSlotType SlotType
         {
             get;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public string Name
         {
             get => _name;
@@ -53,9 +38,6 @@ namespace FlowGraphBase
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public Type VariableType
         {
             get => _varType;
@@ -69,9 +51,6 @@ namespace FlowGraphBase
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public bool IsArray
         {
             get => _isArray;
@@ -85,11 +64,6 @@ namespace FlowGraphBase
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="type"></param>
         public SequenceFunctionSlot(int id, FunctionSlotType type)
         {
             Id = id;
@@ -98,10 +72,6 @@ namespace FlowGraphBase
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="propertyName"></param>
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

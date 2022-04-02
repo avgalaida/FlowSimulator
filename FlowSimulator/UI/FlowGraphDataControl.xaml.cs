@@ -182,17 +182,12 @@ namespace FlowSimulator.UI
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CreateFunction_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             SequenceParametersWindow win = new SequenceParametersWindow
             {
-                Title = "New Function parameters",
-                InputName = "name of the function",
+                Title = "Параметры новой функции",
+                InputName = "Имя функции",
                 InputDescription = "",
                 IsValidInputNameCallback = GraphDataManager.Instance.IsValidFunctionName,
                 Owner = MainWindow.Instance
@@ -216,11 +211,6 @@ namespace FlowSimulator.UI
             MainWindow.Instance.FlowGraphManagerControl.OpenGraphInNewTab(newSeq);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void RenameFunction_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (listBoxGraphFunctions.SelectedItem != null
@@ -269,6 +259,19 @@ namespace FlowSimulator.UI
                     FlowGraphManager.Instance.Remove(flowGraphVM);
                     GraphDataManager.Instance.RemoveFunction(flowGraphVM.Sequence as SequenceFunction);
                 }
+            }
+        }
+
+        private void ArgEdit_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (listBoxGraphFunctions.SelectedItem != null
+                && listBoxGraphFunctions.SelectedItem is SequenceFunction function)
+            {
+                FlowGraphControlViewModel flowGraphVM =
+                    FlowGraphManager.Instance.GetViewModelById(function.Id);
+
+                function.AddInput("NewInput");
+                function.AddOutput("NewOut");
             }
         }
 

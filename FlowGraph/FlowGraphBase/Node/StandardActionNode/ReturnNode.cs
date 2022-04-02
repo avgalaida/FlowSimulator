@@ -5,9 +5,6 @@ using FlowGraphBase.Process;
 
 namespace FlowGraphBase.Node.StandardActionNode
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [Visible(false)]
     public class ReturnNode
         : ActionNode
@@ -23,9 +20,6 @@ namespace FlowGraphBase.Node.StandardActionNode
 
         private List<int> _outputIds = new List<int>();
 
-        /// <summary>
-        /// 
-        /// </summary>
         public override string Title
         {
             get 
@@ -35,31 +29,18 @@ namespace FlowGraphBase.Node.StandardActionNode
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="functionID_"></param>
         public ReturnNode(SequenceFunction function)
         {
             _function = function;
             _function.PropertyChanged += OnFuntionPropertyChanged;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="node_"></param>
         public ReturnNode(XmlNode node)
             : base(node)
         {
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OnFunctionSlotChanged(object sender, FunctionSlotChangedEventArg e)
         {
             if (e.Type == FunctionSlotChangedType.Added)
@@ -67,7 +48,6 @@ namespace FlowGraphBase.Node.StandardActionNode
                 if (e.FunctionSlot.SlotType == FunctionSlotType.Output)
                 {
                     AddFunctionSlot((int)NodeSlotId.InputStart + e.FunctionSlot.Id, SlotType.VarIn, e.FunctionSlot);
-                    //AddSlot((int)NodeSlotId.InputStart + e.FunctionSlot.Id, e.FunctionSlot.Name, SlotType.VarIn, typeof(int));
                 }
             }
             else if (e.Type == FunctionSlotChangedType.Removed)
@@ -81,9 +61,6 @@ namespace FlowGraphBase.Node.StandardActionNode
             OnPropertyChanged("Slots");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private void UpdateNodeSlot()
         {
             GetFunction();
@@ -91,17 +68,11 @@ namespace FlowGraphBase.Node.StandardActionNode
             foreach (SequenceFunctionSlot slot in _function.Outputs)
             {
                 AddFunctionSlot((int)NodeSlotId.InputStart + slot.Id, SlotType.VarIn, slot);
-                //AddSlot((int)NodeSlotId.InputStart + slot.Id, slot.Name, SlotType.VarIn, typeof(int));
             }
 
             OnPropertyChanged("Slots");
-            //OnPropertyChanged("SlotVariableIn");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         private SequenceFunction GetFunction()
         {
             if (_function == null
@@ -113,10 +84,6 @@ namespace FlowGraphBase.Node.StandardActionNode
             return _function;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         private void SetFunction(SequenceFunction func)
         {
             _function = func;
@@ -125,9 +92,6 @@ namespace FlowGraphBase.Node.StandardActionNode
             UpdateNodeSlot();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void InitializeSlots()
         {
             base.InitializeSlots();
@@ -135,10 +99,6 @@ namespace FlowGraphBase.Node.StandardActionNode
             AddSlot((int)NodeSlotId.In, "", SlotType.NodeIn);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public override ProcessingInfo ActivateLogic(ProcessingContext context, NodeSlot slot)
         {
             ProcessingInfo info = new ProcessingInfo
@@ -156,40 +116,23 @@ namespace FlowGraphBase.Node.StandardActionNode
             return info;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         protected override SequenceNode CopyImpl()
         {
             return new ReturnNode(_function);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="node_"></param>
         protected override void Load(XmlNode node)
         {
             base.Load(node);
             _functionId = int.Parse(node.Attributes["functionID"].Value);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="node_"></param>
         public override void Save(XmlNode node)
         {
             base.Save(node);
             node.AddAttribute("functionID", GetFunction().Id.ToString());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void OnFuntionPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
         }

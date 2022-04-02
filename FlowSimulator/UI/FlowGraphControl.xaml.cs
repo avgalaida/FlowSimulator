@@ -713,7 +713,7 @@ namespace FlowSimulator.UI
         private void Launch_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ViewModel.CreateSequence();
-            ProcessLauncher.Instance.LaunchSequence(ViewModel.Sequence, typeof(EventNodeTestStarted), 0, "test");
+            ProcessLauncher.Instance.LaunchSequence(ViewModel.Sequence, typeof(BeginNode), 0, "test");
         }
         
         private void networkControl_NodeDragStarted(object sender, NodeDragStartedEventArgs e)

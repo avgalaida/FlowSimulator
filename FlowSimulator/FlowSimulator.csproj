@@ -98,8 +98,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AvalonEdit\BraceFoldingStrategy.cs" />
-    <Compile Include="CustomNode\EventNodeTestStarted.cs" />
+    <Compile Include="CustomNode\BeginNode .cs" />
     <Compile Include="CustomNode\LogMessageNode.cs" />
+    <Compile Include="CustomNode\TestNodes\TestNode1.cs" />
     <Compile Include="EventArgExt.cs" />
     <Compile Include="FlowGraphs\FlowGraphManager.cs" />
     <Compile Include="Helper.cs" />

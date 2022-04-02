@@ -24,6 +24,7 @@
         <RoutedUICommand x:Key="Commands.CreateFunction" />
         <RoutedUICommand x:Key="Commands.RenameFunction" />
         <RoutedUICommand x:Key="Commands.DeleteFunction" />
+        <RoutedUICommand x:Key="Commands.ArgEdit" />
 
         <RoutedUICommand x:Key="Commands.CreateNamedVar" />
         <RoutedUICommand x:Key="Commands.RenameNamedVar" />
