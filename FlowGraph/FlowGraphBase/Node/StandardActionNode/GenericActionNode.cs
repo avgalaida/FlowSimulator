@@ -892,7 +892,7 @@ namespace FlowGraphBase.Node.StandardActionNode
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [Category("Maths/Logic/LessThan")]
+    [Category("Maths/Logic/МеньшеЧем")]
     public abstract class LessThanNode<T> : MathLogicOperatorNode<T>
     {
         public LessThanNode(XmlNode node) : base(node) { }
@@ -949,7 +949,7 @@ namespace FlowGraphBase.Node.StandardActionNode
     [Name("Integer")]
     public class LessThanNodeInt : LessThanNode<int>
     {
-        public override string Title => "LessThan Integer";
+        public override string Title => "МеньшеЧем Integer";
 
         public LessThanNodeInt()
         { }
@@ -1508,10 +1508,10 @@ namespace FlowGraphBase.Node.StandardActionNode
     /// <summary>
     /// 
     /// </summary>
-    [Name("Integer to String")]
+    [Name("Integer в String")]
     public class ToStringNodeInteger : ToStringNode<int>
     {
-        public override string Title => "Integer to String";
+        public override string Title => "Integer в String";
 
         public ToStringNodeInteger()
         { }
@@ -1971,7 +1971,7 @@ namespace FlowGraphBase.Node.StandardActionNode
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [Category("Maths/Random")]
+    [Category("Maths/Рандом")]
     public abstract class MathRandomNode<T> : ActionNode
     {
         public enum NodeSlotId
@@ -2008,9 +2008,9 @@ namespace FlowGraphBase.Node.StandardActionNode
             AddSlot((int)NodeSlotId.In, "", SlotType.NodeIn);
             AddSlot((int)NodeSlotId.Out, "", SlotType.NodeOut);
 
-            AddSlot((int)NodeSlotId.VarMin, "Min", SlotType.VarIn, typeof(T));
-            AddSlot((int)NodeSlotId.VarMax, "Max", SlotType.VarIn, typeof(T));
-            AddSlot((int)NodeSlotId.VarResult, "Result", SlotType.VarOut, typeof(T));
+            AddSlot((int)NodeSlotId.VarMin, "Мин.", SlotType.VarIn, typeof(T));
+            AddSlot((int)NodeSlotId.VarMax, "Макс.", SlotType.VarIn, typeof(T));
+            AddSlot((int)NodeSlotId.VarResult, "Результат", SlotType.VarOut, typeof(T));
         }
 
         /// <summary>
@@ -2117,10 +2117,10 @@ namespace FlowGraphBase.Node.StandardActionNode
     /// <summary>
     /// 
     /// </summary>
-    [Name("Random Integer")]
+    [Name("Случайный Integer")]
     public class RandomIntegerNode : MathRandomNode<int>
     {
-        public override string Title => "Random Integer";
+        public override string Title => "Случайный Integer";
 
         public RandomIntegerNode()
         { }
@@ -2178,7 +2178,7 @@ namespace FlowGraphBase.Node.StandardActionNode
     /// 
     /// </summary>
     [Category("String")]
-    [Name("Concat")]
+    [Name("Конкатенация")]
     public class StringConcatNode : ActionNode
     {
         public enum NodeSlotId
@@ -2190,7 +2190,7 @@ namespace FlowGraphBase.Node.StandardActionNode
             VarResult
         }
 
-        public override string Title => "String Concat";
+        public override string Title => "Конкатенация строк";
 
         /// <summary>
         /// 

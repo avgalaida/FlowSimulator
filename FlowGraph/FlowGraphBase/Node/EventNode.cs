@@ -7,11 +7,9 @@ namespace FlowGraphBase.Node
 #if EDITOR
     partial
 #endif
-    class EventNode
-        : SequenceNode
+    class EventNode: SequenceNode
     {
-        public EventNode(XmlNode node)
-            : base(node)
+        public EventNode(XmlNode node): base(node)
         {
         }
 

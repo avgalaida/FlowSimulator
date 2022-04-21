@@ -51,7 +51,7 @@ namespace FlowSimulator
             Version ver = Assembly.GetExecutingAssembly().GetName().Version;
             SetTitle();
 
-            LogManager.Instance.WriteLine(LogVerbosity.Info, "Визуальный редактор логики - v{0} запущен", ver);
+            LogManager.Instance.WriteLine(LogVerbosity.Info, "Система визуальный разработки моделей машинного обучения - v{0} запущена", ver);
             VariableTypeInspector.SetDefaultValues();
             NamedVarEditTemplateManager.Initialize();
 
@@ -91,7 +91,7 @@ namespace FlowSimulator
 
                 ProcessLauncher.Instance.StartLoop();
 
-                startProjectThings();
+                //startProjectThings();
             }
             catch (Exception ex)
             {
@@ -406,7 +406,7 @@ namespace FlowSimulator
 
         private void SetTitle()
         {
-            Title = "Визуальный редактор логики";
+            Title = "Система визуальной разработки моделей машинного обучения";
 
             if (string.IsNullOrWhiteSpace(_FileOpened) == false)
             {

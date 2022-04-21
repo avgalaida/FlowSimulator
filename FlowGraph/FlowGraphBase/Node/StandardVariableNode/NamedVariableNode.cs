@@ -4,9 +4,6 @@ using System.Xml;
 
 namespace FlowGraphBase.Node.StandardVariableNode
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [Visible(false)]
     public class NamedVariableNode : VariableNode
     {
@@ -14,39 +11,22 @@ namespace FlowGraphBase.Node.StandardVariableNode
 
         public override string Title => _value.Name;
 
-        /// <summary>
-        /// 
-        /// </summary>
         public string VariableName => _value.Name;
 
-        /// <summary>
-        /// 
-        /// </summary>
         public Type VariableType => _value.VariableType;
 
-        /// <summary>
-        /// 
-        /// </summary>
         public override object Value
         {
             get => _value.Value;
             set => _value.InternalValueContainer.Value = value;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="node_"></param>
         public NamedVariableNode(XmlNode node)
             : base(node)
         {
             InitializeSlots();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name_"></param>
         public NamedVariableNode(string name)
         {
             _value = NamedVariableManager.Instance.GetNamedVariable(name);
@@ -54,9 +34,6 @@ namespace FlowGraphBase.Node.StandardVariableNode
             AddSlot(0, string.Empty, SlotType.VarInOut, _value.VariableType);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void InitializeSlots()
         {
             base.InitializeSlots();

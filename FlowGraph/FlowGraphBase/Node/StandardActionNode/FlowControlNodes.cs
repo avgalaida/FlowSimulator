@@ -11,7 +11,7 @@ namespace FlowGraphBase.Node.StandardActionNode
     /// the incoming value of the attached Boolean, and outputs an execution pulse 
     /// down the appropriate output. 
     /// </summary>
-    [Category("Flow Control"), Name("Branch")]
+    [Category("Flow Control"), Name("Ветвление")]
     public class BranchNode : 
         ActionNode
     {
@@ -23,7 +23,7 @@ namespace FlowGraphBase.Node.StandardActionNode
             VarCond,
         }
 
-        public override string Title => "Branch";
+        public override string Title => "Ветвление";
 
         /// <summary>
         /// 
@@ -46,10 +46,10 @@ namespace FlowGraphBase.Node.StandardActionNode
             base.InitializeSlots();
 
             AddSlot((int)NodeSlotId.In, "", SlotType.NodeIn);
-            AddSlot((int)NodeSlotId.VarCond, "Condition", SlotType.VarIn, typeof(bool));
+            AddSlot((int)NodeSlotId.VarCond, "Условие", SlotType.VarIn, typeof(bool));
 
-            AddSlot((int)NodeSlotId.OutTrue, "True", SlotType.NodeOut);
-            AddSlot((int)NodeSlotId.OutFalse, "False", SlotType.NodeOut);
+            AddSlot((int)NodeSlotId.OutTrue, "Правда", SlotType.NodeOut);
+            AddSlot((int)NodeSlotId.OutFalse, "Ложь", SlotType.NodeOut);
         }
 
         /// <summary>

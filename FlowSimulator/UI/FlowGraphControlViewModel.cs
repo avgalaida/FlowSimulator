@@ -867,41 +867,48 @@ namespace FlowSimulator.UI
             //connect all nodes
             foreach (var link in Network.Connections)
             {
-                if (link.SourceConnector != null
-                    && link.DestConnector != null)
-                {
-                    if (link.SourceConnector.SourceSlot is NodeSlotVar
-                        && link.DestConnector.SourceSlot is NodeSlotVar)
-                    {
-                        //In real time the link is in the right direction
-                        if (link.SourceConnector.SourceSlot.ConnectionType == SlotType.VarIn)
-                        {
-                            link.SourceConnector.SourceSlot.ConnectTo(link.DestConnector.SourceSlot);
-                        }
-                        //When the sequence is loaded from file time the link is not in the right direction
-                        else
-                        {
-                            link.DestConnector.SourceSlot.ConnectTo(link.SourceConnector.SourceSlot);
-                        }
-                        
-                        continue;
-                    }
 
-                    if (link.DestConnector.SourceSlot.ConnectionType == SlotType.NodeOut
-                            || link.DestConnector.SourceSlot.ConnectionType == SlotType.VarOut
-                            || link.DestConnector.SourceSlot.ConnectionType == SlotType.VarIn)
-                    {
-                        link.DestConnector.SourceSlot.ConnectTo(link.SourceConnector.SourceSlot);
-                        continue;
-                    }
+                link.SourceConnector.SourceSlot.ConnectTo(link.DestConnector.SourceSlot);
 
-                    if (link.SourceConnector.SourceSlot.ConnectionType == SlotType.NodeOut
-                            || link.SourceConnector.SourceSlot.ConnectionType == SlotType.VarOut
-                            || link.SourceConnector.SourceSlot.ConnectionType == SlotType.VarIn)
-                    {
-                        link.SourceConnector.SourceSlot.ConnectTo(link.DestConnector.SourceSlot);
-                    }
-                }
+                //if (link.SourceConnector != null
+                //    && link.DestConnector != null)
+                //{
+
+                //link.SourceConnector.SourceSlot.ConnectTo(link.DestConnector.SourceSlot);
+
+                //if (link.SourceConnector.SourceSlot is NodeSlotVar
+                //    && link.DestConnector.SourceSlot is NodeSlotVar)
+                //{
+                //    //In real time the link is in the right direction
+                //    if (link.SourceConnector.SourceSlot.ConnectionType == SlotType.VarIn)
+                //    {
+                //        link.SourceConnector.SourceSlot.ConnectTo(link.DestConnector.SourceSlot);
+                //    }
+                //    //When the sequence is loaded from file time the link is not in the right direction
+                //    else
+                //    {
+                //        link.DestConnector.SourceSlot.ConnectTo(link.SourceConnector.SourceSlot);
+                //    }
+
+                //    continue;
+                //}
+
+                //if (link.DestConnector.SourceSlot.ConnectionType == SlotType.NodeOut
+                //        || link.DestConnector.SourceSlot.ConnectionType == SlotType.VarOut
+                //        || link.DestConnector.SourceSlot.ConnectionType == SlotType.VarIn)
+                //{
+                //    link.DestConnector.SourceSlot.ConnectTo(link.SourceConnector.SourceSlot);
+                //    continue;
+                //}
+
+                //if (link.SourceConnector.SourceSlot.ConnectionType == SlotType.NodeOut
+                //        || link.SourceConnector.SourceSlot.ConnectionType == SlotType.VarOut
+                //        || link.SourceConnector.SourceSlot.ConnectionType == SlotType.VarIn)
+                //{
+                //    link.SourceConnector.SourceSlot.ConnectTo(link.DestConnector.SourceSlot);
+                //}
+
+                //}
             }
 
             foreach (var node in Network.Nodes)

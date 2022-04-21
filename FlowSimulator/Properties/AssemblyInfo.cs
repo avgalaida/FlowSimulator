@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("Визуальный редактор логики")]
+[assembly: AssemblyTitle("Система визуальной разработки моделей машинного обучения")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Институт математики и интеллектуальных систем")]

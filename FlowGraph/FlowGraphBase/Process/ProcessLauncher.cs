@@ -196,7 +196,6 @@ namespace FlowGraphBase.Process
         private void ProcessLoop(bool sleep = true)
         {
             bool processing = true;
-
             while (processing
                 && _mustStop == false)
             {

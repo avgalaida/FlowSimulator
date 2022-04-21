@@ -6,7 +6,7 @@ using FlowGraphBase.Process;
 
 namespace FlowSimulator.CustomNode
 {
-    [Category("Action"), Name("Log")]
+    [Category("Журнал логирования"), Name("Вывод в лог")]
     public class LogMessageNode : ActionNode
     {
         public enum NodeSlotId
@@ -16,17 +16,14 @@ namespace FlowSimulator.CustomNode
             Message
         }
 
-        public override string Title => "Log Message";
+        public override string Title => "Вывод в лог";
 
-        public LogMessageNode(XmlNode node_)
-            : base(node_)
+        public LogMessageNode(XmlNode node_): base(node_)
         {
-
         }
 
         public LogMessageNode()
-        {
-            
+        {  
         }
 
         protected override void InitializeSlots()
@@ -35,8 +32,7 @@ namespace FlowSimulator.CustomNode
 
             AddSlot((int)NodeSlotId.In, "", SlotType.NodeIn);
             AddSlot((int)NodeSlotId.Out, "", SlotType.NodeOut);
-
-            AddSlot((int)NodeSlotId.Message, "Message", SlotType.VarIn, typeof(string));
+            AddSlot((int)NodeSlotId.Message, "Текст", SlotType.VarIn, typeof(string));
         }
 
         public override ProcessingInfo ActivateLogic(ProcessingContext context_, NodeSlot slot_)
@@ -50,10 +46,10 @@ namespace FlowSimulator.CustomNode
             if (val == null)
             {
                 info.State = LogicState.Warning;
-                info.ErrorMessage = "Please connect a string variable node";
+                info.ErrorMessage = "Соединяется только со строковым узлом";
 
-                LogManager.Instance.WriteLine(LogVerbosity.Warning, 
-                    "{0} : No message display because no variable node connected. {1}.",
+                LogManager.Instance.WriteLine(LogVerbosity.Warning,
+                    "{0} : Сообщение не отображается, поскольку узел переменной не подключен. {1}.",
                     Title, info.ErrorMessage);
             }
             else

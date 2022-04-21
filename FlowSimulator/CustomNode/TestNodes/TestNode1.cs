@@ -6,7 +6,7 @@ using FlowGraphBase.Process;
 
 namespace FlowSimulator.CustomNode.TestNodes
 {
-    [Category("TestNodes"), Name("Test1")]
+    [Category("Тестовые"), Name("Тест1")]
     public class TestNode1 : ActionNode
     {
         public enum NodeSlotId
@@ -15,7 +15,7 @@ namespace FlowSimulator.CustomNode.TestNodes
             Out
         }
 
-        public override string Title => "Test_1";
+        public override string Title => "Тест_1";
 
         public TestNode1(XmlNode node_) : base(node_)
         {
