@@ -1,29 +1,27 @@
 ﻿using System.Xml;
-using FlowGraphBase;
 using FlowGraphBase.Logger;
 using FlowGraphBase.Node;
 using FlowGraphBase.Process;
-using FlowSimulator.MLSamples.Regression.TaxiFarePrediction.DataStructures;
 using System;
 using Microsoft.ML;
 using System.IO;
+using FlowGraphBase;
 
-namespace FlowSimulator.CustomNode.TestNodes.Regression
+namespace FlowSimulator.CustomNode.TestNodes.Clustering
 {
-    [Category("Тестовые/Регрессия"), Name("Сохранение модели")]
-    public class ModelSaver: ActionNode
+    [@Category("Тестовые/Кластеризация"), Name("Построение кластеров")]
+    public class BuildClusters: ActionNode
     {
-        private static string BaseModelsRelativePath = @"../../MLSamples/MLModels";
-        private static string ModelRelativePath = $"{BaseModelsRelativePath}/TaxiFareModel.zip";
-        private static string ModelPath = GetAbsolutePath(ModelRelativePath);
+        private static string assetsRelativePath = @"../../MLSamples/Clustering/CustomerSegmentation/assets";
+        private static string assetsPath = GetAbsolutePath(assetsRelativePath);
+        private static string plotSvg = Path.Combine(assetsPath, "outputs", "customerSegmentation.svg");
+        private static string plotCsv = Path.Combine(assetsPath, "outputs", "customerSegmentation.csv");
 
         public static string GetAbsolutePath(string relativePath)
         {
-            FileInfo _dataRoot = new FileInfo(typeof(ModelSaver).Assembly.Location);
+            FileInfo _dataRoot = new FileInfo(typeof(BuildClusters).Assembly.Location);
             string assemblyFolderPath = _dataRoot.Directory.FullName;
-
             string fullPath = Path.Combine(assemblyFolderPath, relativePath);
-
             return fullPath;
         }
 
@@ -32,17 +30,17 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
             In,
             Out,
             ModelIn,
-            NameIn
+            DataIn
         }
 
-        public override string Title => "Сохранить модель";
+        public override string Title => "Построение кластеров";
 
-        public ModelSaver(XmlNode node_) : base(node_)
+        public BuildClusters(XmlNode node_) : base(node_)
         {
 
         }
 
-        public ModelSaver()
+        public BuildClusters()
         {
 
         }
@@ -53,8 +51,8 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
             AddSlot((int)NodeSlotId.In, "", SlotType.NodeIn);
             AddSlot((int)NodeSlotId.Out, "", SlotType.NodeOut);
+            AddSlot((int)NodeSlotId.DataIn, "Данные", SlotType.VarIn, typeof(IDataView));
             AddSlot((int)NodeSlotId.ModelIn, "Модель", SlotType.VarIn, typeof(ITransformer));
-            AddSlot((int)NodeSlotId.NameIn, "Имя", SlotType.VarIn, typeof(string));
         }
 
         public override ProcessingInfo ActivateLogic(ProcessingContext context, NodeSlot slot)
@@ -68,11 +66,13 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
             try
             {
-                //dynamic InModel = GetValueFromSlot((int)NodeSlotId.ModelIn);
-                //dynamic trainedModel = InModel.trainedModel;
-                //dynamic trainingDataView = InModel.trainingDataView;
-                //mlContext.Model.Save(trainedModel, trainingDataView.Schema, ModelPath);
-                LogManager.Instance.WriteLine(LogVerbosity.Info, GetValueFromSlot((int)NodeSlotId.NameIn).ToString() + " сохранена.");
+                LogManager.Instance.WriteLine(LogVerbosity.Info, $"Построение кластеров...");
+                dynamic pivotCsv = GetValueFromSlot((int)NodeSlotId.DataIn);
+                var clusteringModelScorer = new ClusteringModelScorer(mlContext, pivotCsv, plotSvg, plotCsv);
+                dynamic model = GetValueFromSlot((int)NodeSlotId.ModelIn);
+                clusteringModelScorer.LoadModel(model);
+                clusteringModelScorer.CreateCustomerClusters();
+
                 ActivateOutputLink(context, (int)NodeSlotId.Out);
             }
             catch (Exception ex)
@@ -85,7 +85,7 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
         protected override SequenceNode CopyImpl()
         {
-            return new ModelSaver();
+            return new BuildClusters();
         }
     }
 }

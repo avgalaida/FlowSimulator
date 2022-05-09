@@ -1,38 +1,35 @@
 ﻿using FlowGraphBase.Node.StandardVariableNode;
 using System.Xml;
 using Microsoft.ML;
-using System.IO;
 using FlowGraphBase;
 using FlowGraphBase.Node;
-using FlowSimulator.MLSamples.Regression.TaxiFarePrediction.DataStructures;
-using Microsoft.ML.Trainers;
 
-namespace FlowSimulator.CustomNode.TestNodes.Regression
+namespace FlowSimulator.CustomNode.TestNodes.Trainers
 {
-    [@Category("Тестовые/Регрессия"), Name("Trainer SDCA Regression")]
-    public class TrainerSDCA : GenericVariableNode<object>
+    [@Category("Алгоритмы Обучения/Регрессия"), Name("SDCA")]
+    public class SDCA_Regression : GenericVariableNode<IEstimator<ITransformer>>
     {
         MLContext mlContext = new MLContext();
 
-        public override string Title => "SDCA Regression";
+        public override string Title => "Стохастический Двухкоординатный Подъём";
 
-        public TrainerSDCA()
+        public SDCA_Regression()
         {
             Value = mlContext.Regression.Trainers.Sdca(labelColumnName: "Label", featureColumnName: "Features");
         }
 
-        public TrainerSDCA(XmlNode node) : base(node) { }
+        public SDCA_Regression(XmlNode node) : base(node) { }
 
         protected override void InitializeSlots()
         {
             SlotFlag = SlotAvailableFlag.DefaultFlagVariable;
             ControlType = VariableControlType.ReadOnly;
-            AddSlot(0, string.Empty, SlotType.VarInOut, typeof(TrainerEstimatorBase<,>), true, ControlType);
+            AddSlot(0, string.Empty, SlotType.VarInOut, typeof(IEstimator<ITransformer>), true, ControlType);
         }
 
         protected override SequenceNode CopyImpl()
         {
-            TrainerSDCA node = new TrainerSDCA
+            SDCA_Regression node = new SDCA_Regression
             {
                 Value = Value
             };

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.ML;
+using System;
 using System.Collections.Generic;
 using System.Windows.Media;
 
@@ -70,6 +71,26 @@ namespace FlowSimulator.UI
             set;
         }
 
+        //ML стартует здесь
+
+        public static Color DataColor
+        {
+            get;
+            set;
+        }
+
+        public static Color TrainerColor
+        {
+            get;
+            set;
+        }
+
+        public static Color ModelColor
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -89,6 +110,10 @@ namespace FlowSimulator.UI
             _Types.Add(typeof(double));
             _Types.Add(typeof(string));
             _Types.Add(typeof(object));
+
+            _Types.Add(typeof(IDataView));
+            _Types.Add(typeof(IEstimator<ITransformer>));
+            _Types.Add(typeof(ITransformer));
         }
 
         /// <summary>
@@ -99,9 +124,12 @@ namespace FlowSimulator.UI
             BooleanColor = Colors.Red;
             IntegerColor = Colors.Cyan;
             DoubleColor = Colors.Green;
-            StringColor = Colors.Magenta;
+            StringColor = Colors.DarkMagenta;
             ObjectColor = Colors.Blue;
             MessageColor = Colors.Orange;
+            DataColor = Colors.DarkSlateGray;
+            TrainerColor = Colors.MidnightBlue;
+            ModelColor = Colors.SeaGreen;
         }
 
         /// <summary>
@@ -139,6 +167,19 @@ namespace FlowSimulator.UI
             if (type_ == typeof(object))
             {
                 return ObjectColor;
+            }
+            // ML
+            if (type_ == typeof(IDataView))
+            {
+                return DataColor;
+            }
+            if (type_ == typeof(IEstimator<ITransformer>))
+            {
+                return TrainerColor;
+            }
+            if (type_ == typeof(ITransformer))
+            {
+                return ModelColor;
             }
 
             return Colors.White;

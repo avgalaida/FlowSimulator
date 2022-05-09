@@ -6,10 +6,10 @@ using FlowGraphBase.Process;
 using System;
 using Microsoft.ML;
 
-namespace FlowSimulator.CustomNode.TestNodes.Regression
+namespace FlowSimulator.CustomNode.TestNodes.Evaluating
 {
-    [Category("Тестовые/Регрессия"), Name("Оценка Точности")]
-    public class ModelEvaluating: ActionNode
+    [Category("Оценка модели"), Name("Оценка Кластеризации")]
+    public class ClusteringEvaluate: ActionNode
     {
         public enum NodeSlotId
         {
@@ -22,12 +22,12 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
         public override string Title => "Оценка Модели";
 
-        public ModelEvaluating(XmlNode node_) : base(node_)
+        public ClusteringEvaluate(XmlNode node_) : base(node_)
         {
 
         }
 
-        public ModelEvaluating()
+        public ClusteringEvaluate()
         {
 
         }
@@ -53,14 +53,11 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
             try
             {
-                //dynamic InModel = GetValueFromSlot((int)NodeSlotId.ModelIn);
-                //dynamic trainedModel = InModel.trainedModel;
-
                 dynamic trainedModel = GetValueFromSlot((int)NodeSlotId.ModelIn);
                 dynamic testDataView = GetValueFromSlot((int)NodeSlotId.TestDataIn);
                 IDataView predictions = trainedModel.Transform(testDataView);
-                var metrics = mlContext.Regression.Evaluate(predictions, labelColumnName: "Label", scoreColumnName: "Score");
-                PrintRegressionMetrics(metrics);
+                var metrics = mlContext.Clustering.Evaluate(predictions, scoreColumnName: "Score", featureColumnName: "Features");
+                PrintClusteringMetrics(metrics);
                 ActivateOutputLink(context, (int)NodeSlotId.Out);
             }
             catch (Exception ex)
@@ -73,21 +70,17 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
         protected override SequenceNode CopyImpl()
         {
-            return new ModelEvaluating();
+            return new ClusteringEvaluate();
         }
 
-        public static void PrintRegressionMetrics(Microsoft.ML.Data.RegressionMetrics metrics)
+        public static void PrintClusteringMetrics(Microsoft.ML.Data.ClusteringMetrics metrics)
         {
             LogManager.Instance.WriteLine(LogVerbosity.Info, $"Оценка точности модели: ");
             LogManager.Instance.WriteLine(LogVerbosity.Info, $"*************************************************");
-            LogManager.Instance.WriteLine(LogVerbosity.Info, $"*       LossFn:        {metrics.LossFunction:0.##}");
-            LogManager.Instance.WriteLine(LogVerbosity.Info, $"*       R2 Score:      {metrics.RSquared:0.##}");
-            LogManager.Instance.WriteLine(LogVerbosity.Info, $"*       Absolute loss: {metrics.MeanAbsoluteError:#.##}");
-            LogManager.Instance.WriteLine(LogVerbosity.Info, $"*       Squared loss:  {metrics.MeanSquaredError:#.##}");
-            LogManager.Instance.WriteLine(LogVerbosity.Info, $"*       RMS loss:      {metrics.RootMeanSquaredError:#.##}");
+            LogManager.Instance.WriteLine(LogVerbosity.Info, $"*       Среднее Расстояние: {metrics.AverageDistance}");
+            LogManager.Instance.WriteLine(LogVerbosity.Info, $"*       Индекс Дэвиса–Булдина: {metrics.DaviesBouldinIndex}");
             LogManager.Instance.WriteLine(LogVerbosity.Info, $"*************************************************");
 
         }
-
     }
 }

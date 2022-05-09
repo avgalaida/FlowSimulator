@@ -6,10 +6,10 @@ using FlowGraphBase.Process;
 using System;
 using Microsoft.ML;
 
-namespace FlowSimulator.CustomNode.TestNodes.Regression
+namespace FlowSimulator.CustomNode.TestNodes.Evaluating
 {
-    [Category("Тестовые/Регрессия"), Name("Оценка Точности")]
-    public class ModelEvaluating: ActionNode
+    [Category("Оценка модели"), Name("Оценка Регрессии")]
+    public class RegressionEvaluate: ActionNode
     {
         public enum NodeSlotId
         {
@@ -22,12 +22,12 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
         public override string Title => "Оценка Модели";
 
-        public ModelEvaluating(XmlNode node_) : base(node_)
+        public RegressionEvaluate(XmlNode node_) : base(node_)
         {
 
         }
 
-        public ModelEvaluating()
+        public RegressionEvaluate()
         {
 
         }
@@ -53,9 +53,6 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
             try
             {
-                //dynamic InModel = GetValueFromSlot((int)NodeSlotId.ModelIn);
-                //dynamic trainedModel = InModel.trainedModel;
-
                 dynamic trainedModel = GetValueFromSlot((int)NodeSlotId.ModelIn);
                 dynamic testDataView = GetValueFromSlot((int)NodeSlotId.TestDataIn);
                 IDataView predictions = trainedModel.Transform(testDataView);
@@ -73,7 +70,7 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
 
         protected override SequenceNode CopyImpl()
         {
-            return new ModelEvaluating();
+            return new RegressionEvaluate();
         }
 
         public static void PrintRegressionMetrics(Microsoft.ML.Data.RegressionMetrics metrics)
@@ -88,6 +85,5 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
             LogManager.Instance.WriteLine(LogVerbosity.Info, $"*************************************************");
 
         }
-
     }
 }

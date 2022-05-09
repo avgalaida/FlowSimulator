@@ -102,6 +102,9 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot, Version=2.1.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.2.1.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -166,15 +169,26 @@
     <Compile Include="CustomNode\BeginNode .cs" />
     <Compile Include="CustomNode\DataProcNodes\DataSetNodes\DataSetNode.cs" />
     <Compile Include="CustomNode\LogMessageNode.cs" />
+    <Compile Include="CustomNode\TestNodes\Clustering\BuildClusters.cs" />
+    <Compile Include="CustomNode\TestNodes\Clustering\ClusteringModelScorer.cs" />
+    <Compile Include="CustomNode\TestNodes\Clustering\Model002.cs" />
+    <Compile Include="CustomNode\TestNodes\Clustering\ModelBuilderClustering.cs" />
+    <Compile Include="CustomNode\TestNodes\Clustering\PivotDataNode.cs" />
+    <Compile Include="CustomNode\TestNodes\Clustering\PivotDataView.cs" />
+    <Compile Include="CustomNode\TestNodes\Evaluating\ClusteringEvaluate.cs" />
+    <Compile Include="CustomNode\TestNodes\Evaluating\RegressionEvaluate.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\baseTrainingDataView.cs" />
+    <Compile Include="CustomNode\TestNodes\Trainers\KMeans_Clustering.cs" />
+    <Compile Include="CustomNode\TestNodes\Trainers\OGD_Regression.cs" />
+    <Compile Include="CustomNode\TestNodes\Trainers\Poisson_Regression.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\UtilModel.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\ModelBuilder.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\ModelEvaluating.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\ModelSaver.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\testDataView.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\TestFilter.cs" />
-    <Compile Include="CustomNode\TestNodes\Regression\TestModelNode.cs" />
-    <Compile Include="CustomNode\TestNodes\Regression\TrainerSDCA.cs" />
+    <Compile Include="CustomNode\TestNodes\Regression\Model001.cs" />
+    <Compile Include="CustomNode\TestNodes\Trainers\SDCA_Regression.cs" />
     <Compile Include="CustomNode\TestNodes\TestNode1.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\TestSinglePrediction.cs" />
     <Compile Include="EventArgExt.cs" />
@@ -183,6 +197,8 @@
     <Compile Include="Logger\LogCEvent.cs" />
     <Compile Include="Logger\LogEditor.cs" />
     <Compile Include="Logger\LogFile.cs" />
+    <Compile Include="MLSamples\Clustering\CustomerSegmentation\DataStructures\ClusteringPrediction.cs" />
+    <Compile Include="MLSamples\Clustering\CustomerSegmentation\DataStructures\PivotData.cs" />
     <Compile Include="MLSamples\Regression\TaxiFarePrediction\DataStructures\TaxiTrip.cs" />
     <Compile Include="MLSamples\Regression\TaxiFarePrediction\DataStructures\TaxiTripFarePrediction.cs" />
     <Compile Include="MruManager.cs" />
