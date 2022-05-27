@@ -19,7 +19,7 @@ namespace FlowGraphBase.Logger
         private LogVerbosity _verbosity = LogVerbosity.Info;
 #endif
 
-        public LogVerbosity Verbosity { get; set; } = LogVerbosity.Trace;
+        public LogVerbosity Verbosity { get; set; } = LogVerbosity.All;
 
         public int NbErrors
         {

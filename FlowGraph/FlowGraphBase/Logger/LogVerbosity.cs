@@ -8,7 +8,7 @@
     /// </summary>
     public enum LogVerbosity
     {
-        Trace = 0,
+        All = 0,
         Debug = 1,
         Info = 2,
         Warning = 3,

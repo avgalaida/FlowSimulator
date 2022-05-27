@@ -63,20 +63,22 @@ namespace FlowGraphBase
             _slots.CollectionChanged += OnSlotCollectionChanged;
         }
 
-        public void AddInput(string name)
+        public void AddInput(string name, Type type)
         {
-            AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Input) { Name = name });
+            AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Input) { Name = name }, type);
+            _slots.CollectionChanged += OnSlotCollectionChanged;
         }
 
-        public void AddOutput(string name)
+        public void AddOutput(string name, Type type)
         {
-            AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Output) { Name = name });
+            AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Output) { Name = name }, type);
+            _slots.CollectionChanged += OnSlotCollectionChanged;
         }
 
-        private void AddSlot(SequenceFunctionSlot slot)
+        private void AddSlot(SequenceFunctionSlot slot, Type type)
         {
             slot.IsArray = false;
-            slot.VariableType = typeof(int);
+            slot.VariableType = type;
 
             _slots.Add(slot);
 

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using FlowGraphBase;
+using FlowGraphBase.Logger;
 using FlowGraphBase.Script;
 using FlowSimulator.FlowGraphs;
 
@@ -264,14 +265,35 @@ namespace FlowSimulator.UI
 
         private void ArgEdit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            //if (listBoxGraphFunctions.SelectedItem != null
+            //    && listBoxGraphFunctions.SelectedItem is SequenceFunction function)
+            //{
+            //    FlowGraphControlViewModel flowGraphVM =
+            //        FlowGraphManager.Instance.GetViewModelById(function.Id);
+
+            //    function.AddInput("Вход");
+            //    function.AddOutput("Выход");
+
+            //}
+
             if (listBoxGraphFunctions.SelectedItem != null
-                && listBoxGraphFunctions.SelectedItem is SequenceFunction function)
+    && listBoxGraphFunctions.SelectedItem is SequenceFunction function)
             {
                 FlowGraphControlViewModel flowGraphVM =
                     FlowGraphManager.Instance.GetViewModelById(function.Id);
 
-                function.AddInput("NewInput");
-                function.AddOutput("NewOut");
+                ChangeFunctionSlotsWindow win = new ChangeFunctionSlotsWindow(function)
+                {
+                    Title = "Изменение слотов функции " + flowGraphVM.Name,
+                    Owner = MainWindow.Instance
+                };
+
+                if (win.ShowDialog() == false)
+                {
+                    return;
+                }
+
+                LogManager.Instance.WriteLine(LogVerbosity.Info, function.GetNodeById(2).Slots.Length.ToString());
             }
         }
 
