@@ -291,18 +291,18 @@ namespace FlowGraphBase.Script
 
         void ExploreAssembly(Assembly assembly)
         {
-            LogManager.Instance.WriteLine(LogVerbosity.Trace, "Modules in the assembly:");
+            LogManager.Instance.WriteLine(LogVerbosity.All, "Modules in the assembly:");
             foreach (Module m in assembly.GetModules())
             {
-                LogManager.Instance.WriteLine(LogVerbosity.Trace, "{0}", m);
+                LogManager.Instance.WriteLine(LogVerbosity.All, "{0}", m);
 
                 foreach (Type t in m.GetTypes())
                 {
-                    LogManager.Instance.WriteLine(LogVerbosity.Trace, "\t{0}", t.Name);
+                    LogManager.Instance.WriteLine(LogVerbosity.All, "\t{0}", t.Name);
 
                     foreach (MethodInfo mi in t.GetMethods())
                     {
-                        LogManager.Instance.WriteLine(LogVerbosity.Trace, "\t\t{0}", mi.Name);
+                        LogManager.Instance.WriteLine(LogVerbosity.All, "\t\t{0}", mi.Name);
                     }
                 }
             }
@@ -458,6 +458,7 @@ namespace FlowGraphBase.Script
             using System.Xml;
             using FlowSimulator;
             using FlowGraphBase.Logger;
+            using FlowGraphBase.Process;
             //using FlowSimulator.Messages;
             //using FlowSimulator.Sessions;
             using FlowGraphBase.Node;

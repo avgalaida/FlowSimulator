@@ -1,0 +1,51 @@
+﻿<Window x:Class="FlowSimulator.UI.ChangeFunctionSlotsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:FlowSimulator.UI"
+		xmlns:local="clr-namespace:FlowSimulator.UI"
+        mc:Ignorable="d" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        Height="275" Width="516" WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="SharedVisualTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="5,5,0,5" HorizontalAlignment="Left" Width="501">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0"
+                    Orientation="Horizontal" FlowDirection="RightToLeft" >
+
+            <Button Content="Отмена" Width="60" Click="ButtonCancel_Click" />
+            <Button Content="ОК" Margin="5,0,0,0" Width="60" Click="ButtonOK_Click" />
+
+        </StackPanel>
+
+        <Label Content="Вход" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="93" Height="27"/>
+        <ListBox x:Name="InputSlotsListBox" Grid.Column="1" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,41,333,63"/>
+        <Button x:Name="AddSlotInputButton" Click="AddSlotInputButton_Click" Grid.Column="1" Content="Добавить" HorizontalAlignment="Left" Margin="6,167,0,0" Grid.Row="3" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="RemoveSlotInputButton" Grid.Column="1" Content="Удалить" HorizontalAlignment="Left" Margin="98,167,0,0" Grid.Row="3" VerticalAlignment="Top" Width="62"/>
+
+        <Label Grid.Column="1" Content="Выход" HorizontalAlignment="Left" Margin="247,1,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+        <ListBox x:Name="OutputSlotsListBox" Grid.Column="1" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="247,47,96,57"/>
+        <Button x:Name="AddSlotOutputButton" Grid.Column="1" Content="Добавить" HorizontalAlignment="Left" Margin="247,167,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+        <Button x:Name="RemoveSlotsOutputButton" Grid.Column="1" Content="Удалить" HorizontalAlignment="Left" Margin="350,167,0,0" Grid.Row="3" VerticalAlignment="Top" Width="51"/>
+
+    </Grid>
+</Window>

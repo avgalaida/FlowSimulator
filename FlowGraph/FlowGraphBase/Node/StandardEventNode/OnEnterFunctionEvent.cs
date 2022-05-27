@@ -42,7 +42,21 @@ namespace FlowGraphBase.Node.StandardEventNode
         {
 
         }
-
+        //CCHASM
+        public void AddFSlot(int slotId, string text, SlotType connectionType, System.Type type = null,
+    bool saveInternalValue = true, VariableControlType controlType = VariableControlType.ReadOnly,
+    object tag = null)
+        {
+            if (connectionType == SlotType.VarIn
+                || connectionType == SlotType.VarOut)
+            {
+                AddSlot(new NodeSlotVar(slotId, this, text, connectionType, type, controlType, tag, saveInternalValue));
+            }
+            else
+            {
+                AddSlot(new NodeSlot(slotId, this, text, connectionType, type, controlType, tag));
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -55,6 +69,7 @@ namespace FlowGraphBase.Node.StandardEventNode
                 if (e.FunctionSlot.SlotType == FunctionSlotType.Input)
                 {
                     AddFunctionSlot((int)NodeSlotId.OutputStart + e.FunctionSlot.Id, SlotType.VarOut, e.FunctionSlot);
+
                     //AddSlot((int)NodeSlotId.OutputStart + e.FunctionSlot.Id, e.FunctionSlot.Name, SlotType.VarOut, typeof(int));
                 }
             }
@@ -72,7 +87,7 @@ namespace FlowGraphBase.Node.StandardEventNode
         /// <summary>
         /// 
         /// </summary>
-        private void UpdateNodeSlot()
+        public void UpdateNodeSlot()
         {
             GetFunction();
 

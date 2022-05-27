@@ -23,7 +23,7 @@ namespace FlowSimulator.CustomNode.TestNodes.Regression
             Result
         }
 
-        public override string Title => "Однократный Прогноз";
+        public override string Title => "Тест Прогноз";
 
         public TestSinglePrediction(XmlNode node_) : base(node_)
         {

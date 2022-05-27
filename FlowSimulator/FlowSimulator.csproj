@@ -18,6 +18,9 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,11 +33,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -178,6 +178,10 @@
     <Compile Include="CustomNode\TestNodes\Evaluating\ClusteringEvaluate.cs" />
     <Compile Include="CustomNode\TestNodes\Evaluating\RegressionEvaluate.cs" />
     <Compile Include="CustomNode\TestNodes\Regression\baseTrainingDataView.cs" />
+    <Compile Include="CustomNode\TestNodes\test\SrMod.cs" />
+    <Compile Include="CustomNode\TestNodes\test\t1.cs" />
+    <Compile Include="CustomNode\TestNodes\test\t2.cs" />
+    <Compile Include="CustomNode\TestNodes\test\testFuncSlot.cs" />
     <Compile Include="CustomNode\TestNodes\Trainers\KMeans_Clustering.cs" />
     <Compile Include="CustomNode\TestNodes\Trainers\OGD_Regression.cs" />
     <Compile Include="CustomNode\TestNodes\Trainers\Poisson_Regression.cs" />
@@ -204,6 +208,12 @@
     <Compile Include="MruManager.cs" />
     <Compile Include="ProjectManager.cs" />
     <Compile Include="PropertyChangedBase.cs" />
+    <Compile Include="UI\ChangeFunctionSlotsWindow.xaml.cs">
+      <DependentUpon>ChangeFunctionSlotsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ModFunSlotWindow.xaml.cs">
+      <DependentUpon>ModFunSlotWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\NewScriptWindow.xaml.cs">
       <DependentUpon>NewScriptWindow.xaml</DependentUpon>
     </Compile>
@@ -255,6 +265,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\ChangeFunctionSlotsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\ModFunSlotWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\NewScriptWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

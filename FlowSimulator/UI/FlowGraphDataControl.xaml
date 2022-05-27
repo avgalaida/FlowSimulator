@@ -136,7 +136,7 @@
                             <ListBox.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Открыть" Command="{StaticResource Commands.OpenFunction}"/>
-                                    <MenuItem Header="Тест" Command="{StaticResource Commands.ArgEdit}"/>
+                                    <MenuItem Header="Изменить слоты" Command="{StaticResource Commands.ArgEdit}"/>
                                     <MenuItem Header="Создать" Command="{StaticResource Commands.CreateFunction}"/>
                                     <MenuItem Header="Переименовать" Command="{StaticResource Commands.RenameFunction}"/>
                                     <MenuItem Header="Удалить" Command="{StaticResource Commands.DeleteFunction}"/>

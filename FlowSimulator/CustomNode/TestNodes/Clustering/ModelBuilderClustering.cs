@@ -10,7 +10,7 @@ using FlowSimulator.MLSamples.Clustering.CustomerSegmentation.DataStructures;
 
 namespace FlowSimulator.CustomNode.TestNodes.Clustering
 {
-    [Category("Тестовые/Кластеризация"), Name("Обучение с учителем")]
+    [Category("Тестовые/Кластеризация"), Name("Обучение без учителя")]
     public class ModelBuilderClustering: ActionNode
     {
         public enum NodeSlotId
@@ -19,10 +19,12 @@ namespace FlowSimulator.CustomNode.TestNodes.Clustering
             Out,
             TrainerIn,
             TrainingDataIn,
-            Result
+            Result,
+            ClustNum
+
         }
 
-        public override string Title => "Обучение с учителем";
+        public override string Title => "Обучение без учителя";
 
         public ModelBuilderClustering(XmlNode node_) : base(node_)
         {
@@ -42,8 +44,9 @@ namespace FlowSimulator.CustomNode.TestNodes.Clustering
             AddSlot((int)NodeSlotId.In, "", SlotType.NodeIn);
             AddSlot((int)NodeSlotId.Out, "", SlotType.NodeOut);
             AddSlot((int)NodeSlotId.TrainingDataIn, "Выборка", SlotType.VarIn, typeof(IDataView));
-            AddSlot((int)NodeSlotId.TrainerIn, "Учитель", SlotType.VarIn, typeof(IEstimator<ITransformer>));
+            AddSlot((int)NodeSlotId.TrainerIn, "Алгоритм", SlotType.VarIn, typeof(IEstimator<ITransformer>));
             AddSlot((int)NodeSlotId.Result, "Модель", SlotType.VarOut, typeof(ITransformer));
+            AddSlot((int)NodeSlotId.ClustNum, "", SlotType.VarIn, typeof(int));
         }
 
         public override ProcessingInfo ActivateLogic(ProcessingContext context, NodeSlot slot)

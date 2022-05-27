@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Xml;
+using FlowGraphBase.Node;
 using FlowGraphBase.Node.StandardActionNode;
 using FlowGraphBase.Node.StandardEventNode;
 
@@ -14,11 +15,12 @@ namespace FlowGraphBase
     public class SequenceFunction : SequenceBase
     {
         public const string XmlAttributeTypeValue = "Function";
-
         public event EventHandler<FunctionSlotChangedEventArg> FunctionSlotChanged;
 
         private readonly ObservableCollection<SequenceFunctionSlot> _slots = new ObservableCollection<SequenceFunctionSlot>();
         private int _nextSlotId;
+
+        private OnEnterFunctionEvent enterNode;
 
         public IEnumerable<SequenceFunctionSlot> Inputs
         {
@@ -51,7 +53,8 @@ namespace FlowGraphBase
         public SequenceFunction(string name)
             : base(name)
         {
-            AddNode(new OnEnterFunctionEvent(this));
+            enterNode = new OnEnterFunctionEvent(this);
+            AddNode(enterNode);
             AddNode(new ReturnNode(this));
 
             _slots.CollectionChanged += OnSlotCollectionChanged;
@@ -63,20 +66,23 @@ namespace FlowGraphBase
             _slots.CollectionChanged += OnSlotCollectionChanged;
         }
 
-        public void AddInput(string name)
+        public void AddInput(string name, Type type)
         {
-            AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Input) { Name = name });
+            //AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Input) { Name = name }, type);
+            //enterNode.UpdateNodeSlot();
+            enterNode.AddFSlot(2, name, SlotType.VarOut, type);
+
         }
 
-        public void AddOutput(string name)
+        public void AddOutput(string name, Type type)
         {
-            AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Output) { Name = name });
+            AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Output) { Name = name }, type);
         }
 
-        private void AddSlot(SequenceFunctionSlot slot)
+        private void AddSlot(SequenceFunctionSlot slot, Type type)
         {
             slot.IsArray = false;
-            slot.VariableType = typeof(int);
+            slot.VariableType = type;
 
             _slots.Add(slot);
 

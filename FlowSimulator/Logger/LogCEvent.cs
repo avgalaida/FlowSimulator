@@ -15,7 +15,7 @@ namespace FlowSimulator.Logger
 
             switch (verbose)
             {
-                case LogVerbosity.Trace:
+                case LogVerbosity.All:
                     LogFile.OnDebug(msg);
                     break;
 
