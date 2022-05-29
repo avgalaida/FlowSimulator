@@ -9,12 +9,14 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Xml;
+using System.Xml.Linq;
 using FlowGraphBase;
 using FlowGraphBase.Logger;
 using FlowGraphBase.Process;
 using FlowGraphBase.Script;
 using FlowSimulator.FlowGraphs;
 using FlowSimulator.UI;
+using Npgsql;
 using Xceed.Wpf.AvalonDock.Layout;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 using MenuItem = System.Windows.Controls.MenuItem;
@@ -169,6 +171,59 @@ namespace FlowSimulator
         private void ExitCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Exit();
+        }
+
+        //тестим бд
+        private void dbTest_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            dbTest();
+        }
+
+        private void dbTest()
+        {
+            string connectionString = String.Format("Server={0};Port={1};" +
+                                        "User Id={2}; Password={3};Database={4};",
+                                        "localhost", 5432, "postgres",
+                                        "sqwes", "testDB");
+
+            NpgsqlConnection conn = null;
+
+            conn = new NpgsqlConnection(connectionString);
+
+            conn.Open();
+
+            string fileName = "AbstractProject";
+
+            string sqlQuery = "select file from table1 where name = 'AbstractProject'";
+            NpgsqlCommand cmd = new NpgsqlCommand(sqlQuery, conn);
+
+            ProjectManager.Clear();
+
+            try
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                XmlReader xmlReader = XmlReader.Create(new StringReader(cmd.ExecuteScalar().ToString()));
+                xmlDoc.Load(xmlReader);
+
+                XmlNode rootNode = xmlDoc.SelectSingleNode("FlowSimulator");
+
+                if (rootNode != null
+                    && rootNode.Attributes.GetNamedItem("version") != null)
+                {
+                    int version = int.Parse(rootNode.Attributes["version"].Value);
+                }
+
+                NamedVariableManager.Instance.Load(rootNode);
+                FlowGraphManager.Instance.Load(rootNode); // GraphDataManager.Instance.Load(rootNode) done inside
+
+                LogManager.Instance.WriteLine(LogVerbosity.Info, "'{0}' successfully loaded", fileName);
+            }
+            catch (Exception ex)
+            {
+                LogManager.Instance.WriteException(ex);
+            }
+
+            conn.Close();
         }
 
         private void MenuItemLayout_Click(object sender, RoutedEventArgs e)

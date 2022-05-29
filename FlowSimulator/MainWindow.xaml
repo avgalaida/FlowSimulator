@@ -15,6 +15,7 @@
         <CommandBinding Command="Open" Executed="OpenCommandBinding_Executed" />
         <CommandBinding Command="SaveAs" Executed="SaveAsCommandBinding_Executed" />
         <CommandBinding Command="Save" Executed="SaveCommandBinding_Executed" />
+        <CommandBinding Command="{StaticResource Commands.dbTest}" Executed="dbTest_Executed" />
         <!--CommandBinding Command="Exit" Executed="ExitCommandBinding_Executed" /-->
 
         <!-- flow graph debugging -->
@@ -57,6 +58,7 @@
                 <MenuItem Header="Открыть" Command="Open" InputGestureText="Ctrl+O" />
                 <MenuItem Header="Сохранить как" Command="SaveAs" InputGestureText="Shift+Ctrl+S" />
                 <MenuItem Header="Сохранить" Command="Save" InputGestureText="Ctrl+S" />
+                <MenuItem Header="ТестЗагрузкаПроектаИзБазыДанных" Command="{StaticResource Commands.dbTest}" />
                 <Separator />
                 <MenuItem Header="Последние" x:Name="menuItemRecentFiles" />
                 <Separator />

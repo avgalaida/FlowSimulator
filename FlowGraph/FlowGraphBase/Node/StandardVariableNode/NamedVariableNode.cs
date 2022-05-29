@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace FlowGraphBase.Node.StandardVariableNode
 {
@@ -90,6 +91,11 @@ namespace FlowGraphBase.Node.StandardVariableNode
         {
             base.Load(node);
             _value = (NamedVariable)LoadValue(node.SelectSingleNode("Value"));
+        }
+
+        public void addToDB()
+        {
+
         }
     }
 }

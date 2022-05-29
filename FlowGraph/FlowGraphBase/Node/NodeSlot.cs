@@ -105,12 +105,15 @@ namespace FlowGraphBase.Node
             VariableType = type;
         }
 
-        public NodeSlot(int slotId, SequenceNode node, string text, SlotType connectionType, Type type = null, VariableControlType controlType = VariableControlType.ReadOnly, object tag = null) : this(slotId, node, text, connectionType, type, controlType, tag)
-        {
-        }
-
         public bool ConnectTo(NodeSlot dst)
         {
+            ///
+            if (dst == null)
+            {
+                return false;
+            }
+            /// 
+
             if (dst.Node == Node)
             {
                 throw new InvalidOperationException("Try to connect itself");

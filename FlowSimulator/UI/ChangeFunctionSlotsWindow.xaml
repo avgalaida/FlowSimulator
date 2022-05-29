@@ -40,12 +40,12 @@
         <Label Content="Вход" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="93" Height="27"/>
         <ListBox x:Name="InputSlotsListBox" Grid.Column="1" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,41,333,63"/>
         <Button x:Name="AddSlotInputButton" Click="AddSlotInputButton_Click" Grid.Column="1" Content="Добавить" HorizontalAlignment="Left" Margin="6,167,0,0" Grid.Row="3" VerticalAlignment="Top" Width="65"/>
-        <Button x:Name="RemoveSlotInputButton" Grid.Column="1" Content="Удалить" HorizontalAlignment="Left" Margin="98,167,0,0" Grid.Row="3" VerticalAlignment="Top" Width="62"/>
+        <Button x:Name="RemoveSlotInputButton" Click="RemoveSlotInputButton_Click" Grid.Column="1" Content="Удалить" HorizontalAlignment="Left" Margin="98,167,0,0" Grid.Row="3" VerticalAlignment="Top" Width="62"/>
 
         <Label Grid.Column="1" Content="Выход" HorizontalAlignment="Left" Margin="247,1,0,0" Grid.Row="3" VerticalAlignment="Top"/>
         <ListBox x:Name="OutputSlotsListBox" Grid.Column="1" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="247,47,96,57"/>
-        <Button x:Name="AddSlotOutputButton" Grid.Column="1" Content="Добавить" HorizontalAlignment="Left" Margin="247,167,0,0" Grid.Row="3" VerticalAlignment="Top"/>
-        <Button x:Name="RemoveSlotsOutputButton" Grid.Column="1" Content="Удалить" HorizontalAlignment="Left" Margin="350,167,0,0" Grid.Row="3" VerticalAlignment="Top" Width="51"/>
+        <Button x:Name="AddSlotOutputButton" Click="AddSlotOutputButton_Click" Grid.Column="1" Content="Добавить" HorizontalAlignment="Left" Margin="247,167,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+        <Button x:Name="RemoveSlotsOutputButton" Click="RemoveSlotOutputButton_Click" Grid.Column="1" Content="Удалить" HorizontalAlignment="Left" Margin="350,167,0,0" Grid.Row="3" VerticalAlignment="Top" Width="51"/>
 
     </Grid>
 </Window>

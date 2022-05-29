@@ -35,8 +35,10 @@
         <RoutedUICommand x:Key="Commands.OpenScript" />
         <RoutedUICommand x:Key="Commands.CreateScript" />
         <RoutedUICommand x:Key="Commands.RenameScript" />
-        <RoutedUICommand x:Key="Commands.DeleteScript" />        
+        <RoutedUICommand x:Key="Commands.DeleteScript" />
 
+        <RoutedUICommand x:Key="Commands.dbTest" />
+        
         <!-- Expander style -->
         <SolidColorBrush x:Key="NormalBorderBrush" Color="DarkGray"/>
         <SolidColorBrush x:Key="NormalBrush" Color="#202020"/>

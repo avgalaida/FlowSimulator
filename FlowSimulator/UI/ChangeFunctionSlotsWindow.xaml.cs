@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using FlowGraphBase;
+using FlowGraphBase.Logger;
 
 namespace FlowSimulator.UI
 {
@@ -18,8 +19,8 @@ namespace FlowSimulator.UI
             function = fun;       
             Closing += OnClosing;
 
-            UpdateListBox(1, function.Inputs);
-            UpdateListBox(2, function.Outputs);
+            UpdateListBox(InputSlotsListBox, function.Inputs);
+            UpdateListBox(OutputSlotsListBox, function.Outputs);
         }
 
         void OnClosing(object sender, CancelEventArgs e)
@@ -39,29 +40,19 @@ namespace FlowSimulator.UI
             Close();
         }
 
-        private void UpdateListBox(int id, IEnumerable<SequenceFunctionSlot> collection)
+        private void UpdateListBox(System.Windows.Controls.ListBox lB, IEnumerable<SequenceFunctionSlot> collection)
         {
-            if (id == 1)
+            lB.Items.Clear();
+            foreach (SequenceFunctionSlot slot in collection)
             {
-                InputSlotsListBox.Items.Clear();
-                foreach (SequenceFunctionSlot s in collection)
-                {
-                    InputSlotsListBox.Items.Add(s.Id + " " + s.VariableType + " " + s.Name);
-                }
-            }
-            else if (id == 2)
-            {
-                OutputSlotsListBox.Items.Clear();
-                foreach (SequenceFunctionSlot s in collection)
-                {
-                    OutputSlotsListBox.Items.Add(s.VariableType + " " + s.Name);
-                }
+                lB.Items.Add(slot.Id + " " + slot.VariableType + " " + slot.Name);
+                //lB.Items.Add(slot.VariableType + " " + slot.Name);
             }
         }
 
         private void AddSlotInputButton_Click(object sender, RoutedEventArgs e)
         {
-            ModFunSlotWindow win = new ModFunSlotWindow(function)
+            ModFunSlotWindow win = new ModFunSlotWindow(function, 1)
             {
                 Title = "Новый слот",
                 Owner = MainWindow.Instance
@@ -73,8 +64,55 @@ namespace FlowSimulator.UI
             } 
             else
             {
-                UpdateListBox(1, function.Inputs);
-                
+                UpdateListBox(InputSlotsListBox, function.Inputs);
+            }
+        }
+
+        private void AddSlotOutputButton_Click(object sender, RoutedEventArgs e)
+        {
+            ModFunSlotWindow win = new ModFunSlotWindow(function, 2)
+            {
+                Title = "Новый слот",
+                Owner = MainWindow.Instance
+            };
+
+            if (win.ShowDialog() == false)
+            {
+                return;
+            }
+            else
+            {
+                UpdateListBox(OutputSlotsListBox, function.Outputs);
+            }
+        }
+
+        private void RemoveSlotFromFunction(int id, IEnumerable<SequenceFunctionSlot> collection)
+        {
+            List<int> idList = new List<int>();
+            foreach (SequenceFunctionSlot s in collection)
+            {
+                idList.Add(s.Id);
+            }
+            function.RemoveSlotById(idList[id]);
+        }
+
+        private void RemoveSlotInputButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (InputSlotsListBox.SelectedIndex >= 0)
+            {
+                RemoveSlotFromFunction(InputSlotsListBox.SelectedIndex, function.Inputs);
+                InputSlotsListBox.Items.RemoveAt(InputSlotsListBox.SelectedIndex);
+                UpdateListBox(InputSlotsListBox, function.Inputs);
+            }
+        }
+
+        private void RemoveSlotOutputButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OutputSlotsListBox.SelectedIndex >= 0)
+            {
+                RemoveSlotFromFunction(OutputSlotsListBox.SelectedIndex, function.Outputs);
+                OutputSlotsListBox.Items.RemoveAt(OutputSlotsListBox.SelectedIndex);
+                UpdateListBox(OutputSlotsListBox, function.Outputs);
             }
         }
     }

@@ -292,8 +292,6 @@ namespace FlowSimulator.UI
                 {
                     return;
                 }
-
-                LogManager.Instance.WriteLine(LogVerbosity.Info, function.GetNodeById(2).Slots.Length.ToString());
             }
         }
 

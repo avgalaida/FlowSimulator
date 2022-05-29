@@ -8,7 +8,7 @@ namespace FlowSimulator.UI
     public partial class ModFunSlotWindow : Window
     {
         public delegate bool IsValidInputNameDelegate(string name);
-
+        private int listBoxId;
         private bool _dialogResult;
 
         private SequenceFunction function;
@@ -32,10 +32,10 @@ namespace FlowSimulator.UI
             set;
         }
 
-        public ModFunSlotWindow(SequenceFunction fun)
+        public ModFunSlotWindow(SequenceFunction fun, int _listBoxId)
         {
-            InitializeComponent();     
-            
+            InitializeComponent();
+            listBoxId = _listBoxId;
             function = fun;
             Closing += OnClosing;
         }
@@ -52,8 +52,15 @@ namespace FlowSimulator.UI
                     && IsValidInputNameCallback.Invoke(InputName)))
             {
                 Type type = Type.GetType(InputType);
-                function.AddInput(InputName, type);
 
+                if (listBoxId == 1)
+                {
+                    function.AddInput(InputName, type);
+                }
+                else if (listBoxId == 2)
+                {
+                    function.AddOutput(InputName, type);
+                }
                 _dialogResult = true;
                 Close();
             }

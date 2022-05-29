@@ -103,5 +103,10 @@ namespace FlowGraphBase.Logger
 
             WriteLine(LogVerbosity.Error, strBldr.ToString());
         }
+
+        public void WriteLine(LogVerbosity info, int count)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Xml;
 
 namespace FlowGraphBase.Node.StandardEventNode
@@ -42,21 +43,6 @@ namespace FlowGraphBase.Node.StandardEventNode
         {
 
         }
-        //CCHASM
-        public void AddFSlot(int slotId, string text, SlotType connectionType, System.Type type = null,
-    bool saveInternalValue = true, VariableControlType controlType = VariableControlType.ReadOnly,
-    object tag = null)
-        {
-            if (connectionType == SlotType.VarIn
-                || connectionType == SlotType.VarOut)
-            {
-                AddSlot(new NodeSlotVar(slotId, this, text, connectionType, type, controlType, tag, saveInternalValue));
-            }
-            else
-            {
-                AddSlot(new NodeSlot(slotId, this, text, connectionType, type, controlType, tag));
-            }
-        }
         /// <summary>
         /// 
         /// </summary>
@@ -90,11 +76,10 @@ namespace FlowGraphBase.Node.StandardEventNode
         public void UpdateNodeSlot()
         {
             GetFunction();
-
             foreach (SequenceFunctionSlot slot in _function.Inputs)
             {
                 AddFunctionSlot((int)NodeSlotId.OutputStart + slot.Id, SlotType.VarOut, slot);
-                //AddSlot((int)NodeSlotId.OutputStart + slot.Id, slot.Name, SlotType.VarOut, typeof(int));
+                //AddSlot((int)NodeSlotId.OutputStart + slot.Id, slot.Name, SlotType.VarOut, slot.VariableType);
             }
 
             OnPropertyChanged("Slots");

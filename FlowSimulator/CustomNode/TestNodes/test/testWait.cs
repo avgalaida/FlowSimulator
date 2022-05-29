@@ -9,24 +9,24 @@ using FlowGraphBase;
 
 namespace FlowSimulator.CustomNode.TestNodes.test
 {
-    [@Category("Тестовые"), Name("ТестПриём")]
-    public class testFuncSlot: ActionNode
+    [@Category("Тестовые/функ"), Name("ТестЖдун")]
+    public class testWait: ActionNode
     {
         public enum NodeSlotId
         {
             In,
             Out,
-            TestIn
+            TestOut
         }
 
-        public override string Title => "ТестПриём";
+        public override string Title => "ТестЖдун";
 
-        public testFuncSlot(XmlNode node_) : base(node_)
+        public testWait(XmlNode node_) : base(node_)
         {
 
         }
 
-        public testFuncSlot()
+        public testWait()
         {
 
         }
@@ -37,7 +37,7 @@ namespace FlowSimulator.CustomNode.TestNodes.test
 
             AddSlot((int)NodeSlotId.In, "", SlotType.NodeIn);
             AddSlot((int)NodeSlotId.Out, "", SlotType.NodeOut);
-            AddSlot((int)NodeSlotId.TestIn, "Вход", SlotType.VarIn, typeof(string));
+            AddSlot((int)NodeSlotId.TestOut, "Выход", SlotType.VarOut, typeof(string));
         }
 
         public override ProcessingInfo ActivateLogic(ProcessingContext context, NodeSlot slot)
@@ -52,8 +52,15 @@ namespace FlowSimulator.CustomNode.TestNodes.test
             try
             {
                 ActivateOutputLink(context, (int)NodeSlotId.Out);
-                dynamic str = GetValueFromSlot((int)NodeSlotId.TestIn);
-                LogManager.Instance.WriteLine(LogVerbosity.Info, "str=" + str);
+                LogManager.Instance.WriteLine(LogVerbosity.Info, "Ждём");
+                for (double i = 0; i < 9999999999; i++)
+                {
+                    if (i == 9999999998)
+                    {
+                        LogManager.Instance.WriteLine(LogVerbosity.Info, "подождали");
+                    }
+                }
+                SetValueInSlot((int)NodeSlotId.TestOut, "Щищ");
 
             }
             catch (Exception ex)
@@ -66,7 +73,7 @@ namespace FlowSimulator.CustomNode.TestNodes.test
 
         protected override SequenceNode CopyImpl()
         {
-            return new testFuncSlot();
+            return new testWait();
         }
     }
 }

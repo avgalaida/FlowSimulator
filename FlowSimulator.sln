@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdornedControl", "FlowGraph
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowGraphBase", "FlowGraph\FlowGraphBase\FlowGraphBase.csproj", "{27BBCA96-75FA-4D8E-A281-AC166D626ADC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowGraphConsole", "FlowGraph\FlowGraphConsole\FlowGraphConsole.csproj", "{9A00D927-BF00-40CE-AE16-79CA0D476135}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowGraphUI", "FlowGraph\FlowGraphControl\FlowGraphUI.csproj", "{2AA2E559-5417-40ED-A739-D98049C8A68A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkModel", "FlowGraph\NetworkModel\NetworkModel.csproj", "{669475DA-8F89-4657-B917-0B0C126BCD1D}"
@@ -24,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomAndPan", "FlowGraph\ZoomAndPan\ZoomAndPan.csproj", "{468ADEDE-6F5E-40C0-99C9-C6DAC4FAC934}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseDragScrollViewer", "FlowGraph\DragDropScrollViewer\MouseDragScrollViewer.csproj", "{F22DE78E-F54C-460A-B37D-8C9AB3156739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBConsole", "DBConsole\DBConsole.csproj", "{A1487433-E5E7-4E35-B89E-C129865E57CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,16 +69,6 @@ Global
 		{27BBCA96-75FA-4D8E-A281-AC166D626ADC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{27BBCA96-75FA-4D8E-A281-AC166D626ADC}.Release|x86.ActiveCfg = Release|Any CPU
 		{27BBCA96-75FA-4D8E-A281-AC166D626ADC}.Release|x86.Build.0 = Release|Any CPU
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Debug|x86.ActiveCfg = Debug|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Debug|x86.Build.0 = Debug|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Release|Any CPU.ActiveCfg = Release|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Release|Mixed Platforms.Build.0 = Release|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Release|x86.ActiveCfg = Release|x86
-		{9A00D927-BF00-40CE-AE16-79CA0D476135}.Release|x86.Build.0 = Release|x86
 		{2AA2E559-5417-40ED-A739-D98049C8A68A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2AA2E559-5417-40ED-A739-D98049C8A68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AA2E559-5417-40ED-A739-D98049C8A68A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -151,6 +141,18 @@ Global
 		{F22DE78E-F54C-460A-B37D-8C9AB3156739}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F22DE78E-F54C-460A-B37D-8C9AB3156739}.Release|x86.ActiveCfg = Release|Any CPU
 		{F22DE78E-F54C-460A-B37D-8C9AB3156739}.Release|x86.Build.0 = Release|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Debug|x86.Build.0 = Debug|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Release|x86.ActiveCfg = Release|Any CPU
+		{A1487433-E5E7-4E35-B89E-C129865E57CE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,7 +160,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8} = {796E4CAC-D43D-483B-9B9B-9038E529AE4B}
 		{27BBCA96-75FA-4D8E-A281-AC166D626ADC} = {796E4CAC-D43D-483B-9B9B-9038E529AE4B}
-		{9A00D927-BF00-40CE-AE16-79CA0D476135} = {796E4CAC-D43D-483B-9B9B-9038E529AE4B}
 		{2AA2E559-5417-40ED-A739-D98049C8A68A} = {796E4CAC-D43D-483B-9B9B-9038E529AE4B}
 		{669475DA-8F89-4657-B917-0B0C126BCD1D} = {796E4CAC-D43D-483B-9B9B-9038E529AE4B}
 		{B7CA1480-C144-40AC-AB97-A626F800D5B4} = {796E4CAC-D43D-483B-9B9B-9038E529AE4B}

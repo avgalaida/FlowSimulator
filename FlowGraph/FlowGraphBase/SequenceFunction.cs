@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Xml;
-using FlowGraphBase.Node;
 using FlowGraphBase.Node.StandardActionNode;
 using FlowGraphBase.Node.StandardEventNode;
 
@@ -19,8 +18,6 @@ namespace FlowGraphBase
 
         private readonly ObservableCollection<SequenceFunctionSlot> _slots = new ObservableCollection<SequenceFunctionSlot>();
         private int _nextSlotId;
-
-        private OnEnterFunctionEvent enterNode;
 
         public IEnumerable<SequenceFunctionSlot> Inputs
         {
@@ -53,10 +50,8 @@ namespace FlowGraphBase
         public SequenceFunction(string name)
             : base(name)
         {
-            enterNode = new OnEnterFunctionEvent(this);
-            AddNode(enterNode);
+            AddNode(new OnEnterFunctionEvent(this));
             AddNode(new ReturnNode(this));
-
             _slots.CollectionChanged += OnSlotCollectionChanged;
         }
 
@@ -68,10 +63,7 @@ namespace FlowGraphBase
 
         public void AddInput(string name, Type type)
         {
-            //AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Input) { Name = name }, type);
-            //enterNode.UpdateNodeSlot();
-            enterNode.AddFSlot(2, name, SlotType.VarOut, type);
-
+            AddSlot(new SequenceFunctionSlot(++_nextSlotId, FunctionSlotType.Input) { Name = name }, type);
         }
 
         public void AddOutput(string name, Type type)
@@ -113,13 +105,13 @@ namespace FlowGraphBase
         public override void Load(XmlNode node)
         {
             base.Load(node);
-
+          
             foreach (XmlNode slotNode in node.SelectNodes("SlotList/Slot"))
             {
                 int id = int.Parse(slotNode.Attributes["id"].Value);
-                FunctionSlotType type = (FunctionSlotType) Enum.Parse(typeof(FunctionSlotType), slotNode.Attributes["type"].Value);
+                FunctionSlotType type = (FunctionSlotType)Enum.Parse(typeof(FunctionSlotType), slotNode.Attributes["type"].Value);
 
-                if (_nextSlotId <= id) _nextSlotId = id + 1;
+                if (_nextSlotId <= id) _nextSlotId = id;
 
                 SequenceFunctionSlot slot = new SequenceFunctionSlot(id, type)
                 {
